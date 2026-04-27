@@ -1,0 +1,21 @@
+# Sample queries for manual testing.
+# Each one stresses a different dimension of the pipeline.
+
+# Strategy / business
+Impact of AI in banking fraud detection
+Economic viability of small modular nuclear reactors by 2030
+How are LLMs reshaping enterprise customer support?
+
+# Technical / engineering
+Trade-offs between RAG and fine-tuning for domain-specific LLMs
+Vector database selection criteria for production RAG at scale
+Why agentic workflows often fail in production
+
+# Policy / regulatory
+EU AI Act implications for foundation model providers
+Data residency requirements for multinational SaaS in 2026
+
+# Edge cases (test pipeline robustness)
+Hello                                                        # too vague — should still produce structured output
+Compare PostgreSQL and MongoDB for event sourcing            # comparative framing
+Analyze the failure of FTX from a risk management lens       # post-mortem framing

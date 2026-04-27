@@ -1,0 +1,32 @@
+# Central configuration. Edit here instead of touching code.
+
+llm:
+  provider: anthropic                    # openai | anthropic
+  model: claude-haiku-4-5-20251001       # cheap + fast; swap for claude-sonnet-4-6 for higher quality
+  temperature: 0.3
+  max_tokens: 2000
+
+# Per-agent overrides (optional). Useful to use a stronger model for the critic.
+agents:
+  research:
+    temperature: 0.2
+  analyst:
+    temperature: 0.2
+  writer:
+    temperature: 0.5
+  critic:
+    temperature: 0.1
+  reviewer:
+    temperature: 0.4
+
+workflow:
+  max_iterations: 2          # reviewer loops before giving up
+  quality_threshold: 8.0     # 0–10 scale; below this triggers rewrite
+  enable_web_search: false   # if false, research uses simulated knowledge
+
+evaluation:
+  weights:
+    coherence: 0.30
+    clarity: 0.25
+    completeness: 0.30
+    factual_consistency: 0.15
