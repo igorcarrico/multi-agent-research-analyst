@@ -4,7 +4,9 @@ A production-style demonstration of how to orchestrate multiple specialized LLM 
 
 This is not a toy chatbot. It is a small AI product prototype that shows the patterns used in real GenAI engineering: stateful graphs, conditional loops, LLM-as-judge evaluation, and architectural separation between agents, orchestration, evaluation, and presentation.
 
-> **🚀 Live demo:** _(deploy URL goes here after Streamlit Cloud setup)_
+> **🚀 Live demo:** _(deploy URL goes here)_
+>
+> Deployable to Streamlit Community Cloud or any platform supporting Procfiles (Railway, Render, Heroku). See [`Procfile`](Procfile).
 
 ![UI screenshot](docs/screenshot-main.png)
 
