@@ -8,6 +8,5 @@ python-dotenv==1.0.1
 pyyaml==6.0.2
 pydantic==2.10.4
 tenacity==9.0.0
-duckduckgo-search==6.4.1
 markdown==3.7
 xhtml2pdf==0.2.16
