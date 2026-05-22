@@ -11,6 +11,33 @@ from io import BytesIO
 import markdown
 from fpdf import FPDF
 
+# The core PDF fonts (Helvetica/Times/Courier) only cover Latin-1. LLM output
+# routinely contains typographic characters outside that range, so map the
+# common offenders to ASCII before rendering. Portuguese accents (á, ã, ç, …)
+# ARE in Latin-1 and are preserved.
+_UNICODE_REPLACEMENTS = {
+    "—": "-",   # — em dash
+    "–": "-",   # – en dash
+    "‘": "'",   # ‘ left single quote
+    "’": "'",   # ’ right single quote
+    "“": '"',   # “ left double quote
+    "”": '"',   # ” right double quote
+    "…": "...", # … ellipsis
+    "•": "-",   # • bullet
+    "→": "->",  # → arrow
+    " ": " ",   # non-breaking space
+    "​": "",    # zero-width space
+}
+
+
+def _sanitize_for_latin1(text: str) -> str:
+    """Replace common Unicode punctuation, then drop anything still un-encodable."""
+    for bad, good in _UNICODE_REPLACEMENTS.items():
+        text = text.replace(bad, good)
+    # Final safety net: anything still outside Latin-1 becomes '?' instead of
+    # raising and failing the whole PDF.
+    return text.encode("latin-1", "replace").decode("latin-1")
+
 
 def markdown_to_pdf(md_text: str, *, title: str | None = None) -> bytes:
     """Render a Markdown string to PDF bytes.
@@ -18,7 +45,7 @@ def markdown_to_pdf(md_text: str, *, title: str | None = None) -> bytes:
     Returns raw bytes ready to feed Streamlit's `download_button(data=...)`.
     """
     html_body = markdown.markdown(
-        md_text,
+        _sanitize_for_latin1(md_text),
         extensions=["extra", "sane_lists", "nl2br"],
     )
 
